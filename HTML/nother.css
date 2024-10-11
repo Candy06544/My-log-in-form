@@ -1,0 +1,154 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #232420; /* Dark background */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.box {
+    position: relative;
+    width: 380px;
+    min-height: 80vh;
+    background-color: #1c1c1c; /* Dark gray for the form box */
+    border-radius: 8px;
+    overflow: hidden; /* Ensures the rotating line stays within the box */
+}
+
+.box::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Aligns with the top of the box */
+    left: 0; /* Aligns with the left of the box */
+    width: 100%; /* Cover the box area */
+    height: 100%; /* Cover the box area */
+    border: 2px solid rgba(153, 102, 255, 0.4); /* Light purple border with reduced opacity */
+    border-radius: 8px; /* Match the border radius of the box */
+    z-index: 1; /* Behind the form */
+    animation: animate 6s linear infinite; /* Keep the animation */
+    box-sizing: border-box; /* Include padding and border in the total width and height */
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg); /* Rotate continuously */
+    }
+    100% {
+        transform: rotate(360deg); /* Complete a full rotation */
+    }
+}
+
+.box form {
+    position: absolute;
+    inset: 5px;
+    background: #222; /* Slightly lighter gray for the form background */
+    padding: 50px 40px;
+    z-index: 2; /* Above the rotating line */
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+}
+
+.box form h2 {
+    color: #e0e0e0; /* Light gray for text */
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 30px; /* Added margin for spacing */
+}
+
+.box form .inputbox {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px; /* Increased margin for better spacing */
+}
+
+.box form .inputbox input {
+    width: 100%;
+    padding: 10px 10px;
+    background: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    color: #e0e0e0; /* Light gray for text */
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+.box form .inputbox span {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #8f8f8f; /* Gray for the label */
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+}
+
+.box form .inputbox input:focus + span,
+.box form .inputbox input:valid + span {
+    top: 0;
+    font-size: 0.8em;
+    color: #99aaff; /* Change color on focus */
+}
+
+.box form .inputbox i {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #99aaff; /* Change color for the underline */
+    transition: width 0.3s;
+}
+
+.box form .inputbox input:focus ~ i,
+.box form .inputbox input:valid ~ i {
+    width: 100%;
+}
+
+.box form .links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Increased margin for better spacing */
+}
+
+.box form .links a {
+    margin: 0;
+    font-size: 0.9em;
+    color: #99aaff; /* Change link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.box form .links a:hover {
+    color: #99aaff;
+}
+
+.box form input[type="submit"] {
+    padding: 10px;
+    background-color: #99aaff; /* Submit button color */
+    border: none; /* Removed incomplete border property */
+    border-radius: 4px;
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    width: 100px;
+    align-self: center; /* Center the submit button */
+    margin-top: 10px; /* Added margin for spacing */
+}
+
+.box form input[type="submit"]:hover {
+    background-color:#99aaff;
+}
+
+.box form input[type="submit"]:active {
+    transform: scale(0.98);
+}
